@@ -1,4 +1,5 @@
 CC = gcc
 all:arrange
-arrange:Nallarrange.o
-	$(CC) -o -std=gnu99 Nallarrange Nallarrange.o
+arrange:Nallarrange.o Nall.o
+	$(CC) -o Nallarrange Nallarrange.o
+	g++ -o Nall Nall.o
