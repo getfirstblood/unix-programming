@@ -1,0 +1,33 @@
+#include"apue.h"
+#include<sys/wait.h>
+static void sig_nal(int);
+int main(void)
+{
+	char buf[MAXLINE];
+	pid_t pid;
+	int status;
+	if(signal(SIGINT,sig_nal) == SIG_ERR)
+		err_sys("error");
+	printf("%%");
+	while(fgets(buf,MAXLINE,stdin) != NULL)
+	{
+		if(buf[strlen(buf)-1] == '\n')
+			buf[strlen(buf)-1] = 0;
+		if((pid = fork()) <0)
+			err_sys("error");
+		else if(pid == 0) //child thread
+		{
+			execlp(buf,buf,(char *)0);
+			err_ret("error");
+			exit(127);
+		}
+		if((pid = waitpid(pid,&status,0)) <0)
+			err_sys("error");
+		printf("%%");
+	}
+	exit(0);
+}
+void sig_nal(int signo)
+{
+	printf("SIGINT");
+}

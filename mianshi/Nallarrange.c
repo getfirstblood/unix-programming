@@ -1,0 +1,34 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+typedef int bool;
+bool used[100];
+char a[100],n,c[100];
+int f(int dep){
+    if(dep>=n){
+		int i;
+        for(i = 0;i<n;i++)
+            printf("%c ",a[i]);
+        printf("\n");
+    }
+    else{
+		int i;
+        for(i = 0;i<n;i++)
+            if(!used[i]){
+                a[dep] = c[i];
+                used[i] = 1;
+                f(dep+1);
+                used[i] = 0;
+            }
+    }
+}
+
+int main(){
+    scanf("%d",&n);
+    scanf("%s",c);
+    f(0);
+    system("Pause");
+    return 0;
+}
+
+//

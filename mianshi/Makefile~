@@ -1,0 +1,4 @@
+CC = gcc
+all:arrange
+arrange:Nallarrange.o
+	$(CC) -o -std=gnu99 Nallarrange Nallarrange.o

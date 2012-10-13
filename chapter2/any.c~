@@ -1,0 +1,15 @@
+#include<dirent.h>
+#include"apue.h"
+int main(int argv, char *argc[])
+{
+	DIR *dir;
+	struct dirent *dirp;
+	if(argv != 2)
+		err_sys("error");
+	if((dir = opendir(argc[1]))==NULL)
+		err_sys("error");
+	while((dirp = readdir(dir)) != NULL)
+		printf("%s",dirp->d_name);
+	closedir(dir);
+	exit(0);
+}

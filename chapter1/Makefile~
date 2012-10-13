@@ -1,0 +1,35 @@
+
+## Created by Anjuta
+
+CC = gcc
+CFLAGS = -g -Wall
+OBJECTS = unixproject.o
+INCFLAGS = 
+LDFLAGS = -Wl,-rpath,/usr/local/lib
+LIBS = -L../lib -lapue
+
+all: unixproject
+
+unixproject: $(OBJECTS) copyfile.o stdiocopyfile.o getpid.o realizeShell.o errnotest.o
+	$(CC) -o unixproject $(OBJECTS) $(LDFLAGS) $(LIBS)
+	$(CC) -o copyfile 	copyfile.o $(LDFLAGS) $(LIBS)
+	$(CC) -o stdiocopyfile 	stdiocopyfile.o $(LDFLAGS) $(LIBS)
+	$(CC) -o getpid 	getpid.o $(LDFLAGS) $(LIBS)
+	$(CC) -o realizeShell 	realizeShell.o $(LDFLAGS) $(LIBS)
+	$(CC) -o errnotest 	errnotest.o $(LDFLAGS) $(LIBS)
+
+.SUFFIXES:
+.SUFFIXES:	.c .cc .C .cpp .o
+
+.c.o :
+	$(CC) -o $@ -c $(CFLAGS) $< $(INCFLAGS)
+
+count:
+	wc *.c *.cc *.C *.cpp *.h *.hpp
+
+clean:
+	rm -f *.o
+
+.PHONY: all
+.PHONY: count
+.PHONY: clean
