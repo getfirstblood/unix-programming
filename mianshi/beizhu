@@ -1,7 +1,7 @@
 1、c++中list对象的学习
-2、快速排序
+2、快速排序（ok）
 3、数据库操作（系统级、表操作）、视图
-4、数据结构后部分复习
+4、数据结构后部分复习（ok）
 
 循环链表结点最长问题
 全排列
@@ -52,11 +52,47 @@ malloc,free和new,delete有区别吗？如果有，是什么？
 4,C++程序经常要调用C函数，而C程序只能用malloc/free管理动态内存
 
 gcc编译选项
--c -o 
+-c -o -L -g -share 生成静态链接库：ar crv test.a test1.o test2.o test3.o  生成动态链接库：gcc -shared -o libtt.so tt.c可以通过help --gcc 查看
 gdb中如何设置中断点，逐步调试程序
-break run continue print next qiut
+break run continue print next qiut list forward tbreak clear awatch watch commands delete disable enable ignore condition cont step display backtrace frame infoframe
 windows中的内存分配方式
 固定分区 动态分区 可重定位动态分区 分页 分段
 
 存储过程语法
 sql语句：
+
+
+c++ const作用：1、变量不可变。 2、变量默认为文件的局部变量 3、通常不为它分配内存空间，而只是存在符号表中。
+
+#define 宏定义可以用什么等价方式替换？
+
+头文件中应该放：类的定义、extern 变量声明、函数声明（不应该含有定义有三个除外：类、编译时就知道值的const变量、inline函数）
+
+预处理的作用：1、防止多重包含时的重复声明（文件保护符）
+
+c++ 中std(标准库中的三个类型介绍：string、vertor、bitmap)：他们有自己的配套类型（供成员方法使用）
+string类型：如遍历string成员：
+for（stringh::size_type i = 0;i != s.size();i++）
+{
+}
+vector类型（使用类模板）。vector是什么存储结构（动态数组）
+参考链接：http://blog.csdn.net/junguo/article/details/671142
+http://wenku.baidu.com/view/2355e2630b1c59eef8c7b47d.html
+
+总结：1、STL中为我们提供的最重要的两个内容是容器（vector，list等）和一系列的算法。在这些算法中有许多需要遍历容器中的所有元素，如search，sort等算法。STL的设计者希望将算法和容器分离开来，一个算法可以帮不同的容器实现功能。为此目的，STL应用到了《设计模式》中提到的迭代器模式。
+    《设计模式》中将迭代器模式定义为：提供一种方法，使之能依序遍历容器中的每个元素，而不需要暴露容器内部的信息。在面向对象的设计里，实现迭代器，我们会为所有的迭代器提供一个统一的接口，然后更个容器的迭代器继承这个接口，然后在使用处通过接口来实现对不同迭代器的调用。但STL是采用泛型思维，利用摸版来实现的类库，所以它的迭代器的实现和面向对象稍有不同，但原理类似。在此将通过例子来具体看看STL中迭代器的实现
+    2、每个容器有自己的迭代器（遍历元素之类的功能），这样算法就能通过这些迭代器在所有容器上通用。
+    
+七种通用的数据结构（容器）：
+vector、list、deque（双向队列）、stack、queue、map
+七十多中通用算法：
+（1）只检查不更改数据的算法：find()、count()
+(2)会更改容器内元素的算法：copy()、reverse()等
+（3）和数值相关的算法：accumulate()等
+抽象的指针---迭代子（iterators）
+（1）输入型 （2）输出型 （3）前进型 （4）双向型 （5）随机存取型
+
+动态申请一个二维数组指针(十行两列)：
+int **p;
+p = new int *a[10];
+p[i] = new int[2];
